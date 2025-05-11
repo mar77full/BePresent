@@ -1,0 +1,71 @@
+﻿@page
+@* @model BePresent.Pages.Shared._AdminSidebarPartialModel
+ *@@{
+    Layout = null;
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString();
+}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        @* <li class="nav-item">
+            <a class="nav-link " href="#">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li> *@<!-- End Dashboard Nav -->
+        <li class="nav-heading">Employee Management</li>
+
+        <li class="nav-item">
+
+@*             <a class="nav-link @(currentPage == "/AdminDashboard/EmployeeList" ? "" : "collapsed")" asp-page="/AdminDashboard/EmployeeList">
+ *@   
+     <a class="nav-link @(currentPage == "/AdminDashboard/EmployeeList" ? "active" : "collapsed")" asp-page="/AdminDashboard/EmployeeList">
+
+ @*  <i class="bi bi-person"></i> *@
+                <i class="bx bxs-user-detail"></i>
+                <span>Employee List</span>
+            </a>
+        </li><!-- End Nav 1 -->
+
+        <li class="nav-item">
+
+@*             <a class="nav-link @(currentPage == "/AdminDashboard/CreateEmployee" ? "" : "collapsed")" asp-page="/AdminDashboard/CreateEmployee">
+ *@
+            <a class="nav-link @(currentPage == "/AdminDashboard/CreateEmployee" ? "active" : "collapsed")" asp-page="/AdminDashboard/CreateEmployee">
+
+
+                <i class="bx bx-user-plus"></i>
+
+                <span>Create New Employee</span>
+            </a>
+        </li><!-- End Nav 2 -->
+
+        <li class="nav-item">
+
+            @*             <a class="nav-link @(currentPage == "/AdminDashboard/CreateEmployee" ? "" : "collapsed")" asp-page="/AdminDashboard/CreateEmployee">
+ *@
+            <a class="nav-link @(currentPage == "/Reports/WeeklyReport" ? "active" : "collapsed")" asp-page="/Reports/WeeklyReport">
+
+
+                <i class="bi bi-journal-text"></i>
+
+                <span>Weekly Report</span>
+            </a>
+        </li>
+
+       @*  <li class="nav-item">
+
+            <a class="nav-link @(currentPage == "/AdminDashboard/ManageEmployee" ? "" : "collapsed")" asp-page="/AdminDashboard/ManageEmployee">
+
+            <a class="nav-link @(currentPage == "/AdminDashboard/ManageEmployee" ? "active" : "collapsed")" asp-page="/AdminDashboard/ManageEmployee">
+
+                <i class="bx bxs-edit"></i>
+                <span>Edit/Delete Employee</span>
+            </a>
+        </li> *@<!-- End Nav 3 -->
+
+    </ul>
+
+</aside><!-- End Sidebar-->

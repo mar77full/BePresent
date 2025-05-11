@@ -1,0 +1,33 @@
+﻿@page
+@* @model BePresent.Pages.Shared._EmployeeSidebarPartialModel *@
+@{
+    Layout = null;
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString();
+}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+       @*  <li class="nav-item">
+            <a class="nav-link " href="#">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li> *@<!-- End Dashboard Nav -->
+        <li class="nav-heading">Attendance Management</li>
+
+        <li class="nav-item">
+
+            <a class="nav-link @(currentPage == "/EmployeeDashboard/ViewCurrentAttendance" ? "active" : "collapsed")" asp-page="/EmployeeDashboard/ViewCurrentAttendance">
+
+                <i class="bi bi-clock"></i>
+
+                <span>View Attendance</span>
+            </a>
+        </li><!-- End Nav 1 -->
+
+
+    </ul>
+
+</aside><!-- End Sidebar-->

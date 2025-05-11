@@ -1,0 +1,174 @@
+﻿@page
+@using System.Globalization
+@model BePresent.Pages.EmployeeDashboard.ViewCurrentAttendance
+@{
+}
+@await Html.PartialAsync("_EmployeeSidebarPartial", new BePresent.Pages.Shared.Pages_Shared__EmployeeSidebarPartial
+    {
+
+    })
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Today Attendance</h5>
+
+        @{
+            var attendancemdl = Model.attendance;
+            bool hasCheckedIn = attendancemdl?.CheckIn != null;
+            bool hasCheckedOut = attendancemdl?.CheckOut != null;
+        }
+        @if (hasCheckedIn && !hasCheckedOut)
+        {
+            <span class="badge bg-success">Checked In</span>
+        }
+        else if (hasCheckedOut)
+        {
+            <span class="badge bg-success">Checked Out</span>
+        }
+        else
+        {
+            <span class="badge bg-warning text-dark">No Attendance</span>
+        }
+        @* 
+        @{
+            bool isCheckedIn = (Model.attendance?.CheckOut.HasValue ?? false) && !(Model.attendance?.CheckIn!=null);
+        }
+        @if (isCheckedIn)
+        {
+                <span class="badge bg-danger">Checked In</span>
+
+        }
+
+        else if (Model.attendance?.CheckOut.HasValue?? false)
+        {
+
+                <span class="badge bg-secondary">Checked Out</span>
+
+        } *@
+
+        <form method="post" class="row g-3" style="margin-top:10px">
+            <input type="hidden" asp-for="Employee_id" />
+            <label asp-for="Reason">Reason</label>
+            <input type="text" asp-for="Reason" class="form-control" placeholder="Reason">
+            <span asp-validation-for="Reason" class="text-danger"></span>
+            <button type="submit" asp-page-handler="CheckIn" class="btn btn-success" disabled="@hasCheckedIn">Check In</button>
+
+            <button type="submit" asp-page-handler="CheckOut" class="btn btn-success" disabled="@(!hasCheckedIn||hasCheckedOut)">Check Out</button>
+        </form>
+
+
+    </div>
+</div><!-- End Heading Badges -->
+
+@* <div class="col-lg-6">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Check In</h5>
+
+            <!-- General Form Elements -->
+            <form method="post">
+                <input type="hidden" asp-for="Employee_id" />
+                @if (Model.IsLateCheckIn)
+                {
+                    <div class="row mb-3">
+                        <label asp-for="Reason" class="col-sm-2 col-form-label">Reason</label>
+                        <div class="col-sm-10">
+                           <textarea asp-for="Reason" class="form-control"></textarea>
+                        </div>
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+
+                }
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Check In</label>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Check In</button>
+                    </div>
+                </div>
+
+            </form><!-- End General Form Elements -->
+
+        </div>
+    </div>
+
+</div> *@
+<div class="col-lg-12">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Attandance</h5>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">View Attendance</h5>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th><b>First Name</b></th>
+                                <th><b>Last Name</b></th>
+                                <th><b>Date</b></th>
+                                <th><b>Check In</b></th>
+
+                                <th><b>Check Out</b></th>
+                                @*  <th><b>Is late check in</b></th> *@
+                                <th><b>Reason</b></th>
+                                @*  <th><b>Is early check out</b></th> *@
+                                <th><b>Reason</b></th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var attendance in Model.Attendances)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @attendance.First_name
+                                    </td>
+                                    <td>
+                                        @attendance.Last_name
+                                    </td>
+                                    <td>
+                                       @*  @attendance.Date.ToString("yyyy-MM-dd") *@
+                                        @attendance.Date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+                                    </td>
+                                    <td>
+                                        @attendance.CheckIn.ToString("HH:mm:ss")
+                                    </td>
+                                    <td>
+                                        @(attendance.CheckOut.HasValue ? attendance.CheckOut.Value.ToString("HH:mm:ss") : " ")
+                                    </td>
+                                    @* <td>
+                                        @attendance.IsLate
+                                    </td> *@
+                                    <td>
+                                        @attendance.CheckInReason
+                                    </td>
+                                    @* <td>
+                                        @attendance.IsEarly
+                                    </td> *@
+                                    <td>
+                                        @attendance.CheckOutReason
+                                    </td>
+
+
+                                </tr>
+                            }
+                            <!-- Continue for other rows the same way... -->
+                        </tbody>
+                    </table>
+
+                    <!-- End Table with stripped rows -->
+                </div>
+            </div>
+
+        </div>
+
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+
+        }

@@ -1,0 +1,241 @@
+﻿@page "{id}"
+@using System.Globalization
+@model BePresent.Pages.AdminDashboard.EmployeeDetailsModel
+@{
+    ViewData["Title"] = "Dashboard - Employee Details";
+    ViewData["HeadLine"] = "Employee Management";
+}
+
+@* @await Html.PartialAsync("/Pages/Shared/_AdminSidebarPartial.cshtml") *@
+@await Html.PartialAsync("_AdminSidebarPartial", new BePresent.Pages.Shared.Pages_Shared__AdminSidebarPartial
+    {
+
+    })
+
+<div class="col-lg-6">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Employee Details</h5>
+
+            <!-- General Form Elements -->
+            <form>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">First Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="firstName" class="form-control" value="@Model.Employee.First_name" readonly />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Last Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="lastName" class="form-control" value="@Model.Employee.Last_name" readonly />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="nationalNumber" class="col-sm-2 col-form-label">National Number</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nationalNumber" name="nationalNumber" value="@Model.Employee.National_number" readonly>
+
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="iqamaNumber" class="col-sm-2 col-form-label">Iqama Number</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="iqamaNumber" name="iqamaNumber" value="@Model.Employee.Iqama_number" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" value="@Model.Employee.Email" class="form-control" readonly>
+                    </div>
+                </div>
+                @*  <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control">
+                    </div>
+                </div> *@
+                <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">Phone Number</label>
+                    <div class="col-sm-10">
+                        <input type="number" value="@Model.Employee.Phone_number" class="form-control" readonly>
+                    </div>
+                </div>
+                @*  <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                </div> *@
+                <div class="row mb-3">
+                    <label for="inputDate" class="col-sm-2 col-form-label">Birth Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" value="@(Model.Employee.Birth_date.HasValue ? Model.Employee.Birth_date.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) : "")" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputDate"  class="col-sm-2 col-form-label" >Joined Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" value="@(Model.Employee.Joined_date.HasValue ? Model.Employee.Joined_date.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) : "")" class="form-control" readonly>
+                    </div>
+                </div>
+                @*  <div class="row mb-3">
+                    <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
+                    <div class="col-sm-10">
+                        <input type="time" class="form-control">
+                    </div>
+                </div> *@
+
+                @*  <div class="row mb-3">
+                    <label for="inputColor" class="col-sm-2 col-form-label">Color Picker</label>
+                    <div class="col-sm-10">
+                        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#4154f1" title="Choose your color">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Textarea</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" style="height: 100px"></textarea>
+                    </div>
+                </div> *@
+                <fieldset class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="male" asp-for="Employee.Gender" disabled>
+                            <label class="form-check-label" asp-for="Employee.Gender">
+                                Male
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="female" asp-for="Employee.Gender" disabled>
+                            <label class="form-check-label" asp-for="Employee.Gender">
+                                Female
+                            </label>
+                        </div>
+
+                    </div>
+                </fieldset>
+                @*  <div class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Checkboxes</legend>
+                    <div class="col-sm-10">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck1">
+                            <label class="form-check-label" for="gridCheck1">
+                                Example checkbox
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+                            <label class="form-check-label" for="gridCheck2">
+                                Example checkbox 2
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Disabled</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="Read only / Disabled" disabled>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Select</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div> *@
+
+                @*  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Multi Select</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" multiple aria-label="multiple select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div> *@
+
+                <fieldset class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Marital Status</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="Single" asp-for="Employee.Marital_status" disabled>
+                            <label class="form-check-label" asp-for="Employee.Marital_status">
+                                Single
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio"  value="Married" asp-for="Employee.Marital_status" disabled>
+                            <label class="form-check-label" asp-for="Employee.Marital_status">
+                                Married
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="Divorced" asp-for="Employee.Marital_status" disabled>
+                            <label class="form-check-label" asp-for="Employee.Marital_status">
+                                Divorced
+                            </label>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Position</label>
+                    <div class="col-sm-10">
+                        <input type="text" value="@Model.Employee.Position" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Nationality</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="@Model.Employee.Nationality" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="salary" class="col-sm-2 col-form-label">Salary</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="salary" name="salary" value="@Model.Employee.Salary" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="@Model.selectedRole" class="col-sm-2 col-form-label">Role</label>
+                    <div class="col-sm-10">
+                        <select asp-for="@Model.selectedRole" asp-items="@Model.Roles" class="form-control">
+                            <option value="">Select Role</option>
+                        </select>
+                    </div>
+                </div>
+
+               @*  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Submit Button</label>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Submit Form</button>
+                    </div>
+                </div> *@
+
+            </form><!-- End General Form Elements -->
+
+        </div>
+    </div>
+
+</div>
